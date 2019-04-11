@@ -1,0 +1,42 @@
+.noteListItem {
+    padding: 20px;
+    margin-bottom: 10px;
+    border: solid 1px grey;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+   
+}
+.note_deleteButton {
+    position: relative;
+    left: 10px;
+    max-width: 150px;
+    min-width: 100px;
+}
+
+.note_controls {
+    float: right;
+    display: flex;
+    padding: 20px;
+    margin: 10px;
+
+}
+
+.note_info {
+    width: 400px;
+
+}
+
+.note_title {
+    padding: 0;
+    margin: 0;
+    font-size: 18px;
+    
+}
+
+
+.note_dateModified {
+    display: inline-block;
+    margin-top: 10px;
+}
+
