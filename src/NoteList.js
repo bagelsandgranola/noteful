@@ -1,20 +1,22 @@
 import React from 'react';
 import './NoteList.css';
 import NoteListItem from './NoteListItem';
+import NotesContext from './NotesContext';
 
 class NoteList extends React.Component {
 
+    static contextType = NotesContext;
 
 render() {
 
     
-    const data = this.props.data;
+    const data = this.context.notes;
     console.log(data);
 
-    const noteData = this.props.data.notes;
+    const noteData = this.context.notes;
     console.log(noteData);
 
-    const folderData = this.props.data.folders;
+    const folderData = this.context.folders;
     console.log(folderData);
 
     var noteListItems= [];

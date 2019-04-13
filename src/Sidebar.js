@@ -1,12 +1,16 @@
 import React from 'react';
 import './Sidebar.css';
 import { Link } from 'react-router-dom';
+import NotesContext from './NotesContext';
+
 
 class Sidebar extends React.Component {
 
+static contextType = NotesContext;
+
 render() {
 
-    const folderData = this.props.data.folders;
+    const folderData = this.context.folders;
     console.log(folderData);
 
     const folderNav = folderData.map(folder => {

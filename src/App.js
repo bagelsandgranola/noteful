@@ -7,72 +7,129 @@ import NOTES from './dummy-store';
 import { Route } from 'react-router-dom';
 import NotePageSidebar from './NotePageSidebar';
 import Note from './Note';
+import NotesContext from './NotesContext'
 
 class App extends React.Component {
 
   state = {
-    notes: NOTES,
+    notes: [],
+    folders: [],
+  }
+
+  componentDidMount() {
+    console.log("componentDidMount")
+    //folders http://localhost:9090/folders
+    fetch('http://localhost:9090/folders')
+    .then(res => {
+      if (!res.ok) {
+        throw new Error(res.status)
+      }
+      return res.json()
+    })
+    .then (data => {
+      this.setState({
+        folders: data,
+      })
+      console.log(this.state.folders);
+    })
+    .catch(error => {
+      console.log("folder retreival error", error)
+    })
+
+    //notes 
+    fetch('http://localhost:9090/notes')
+    .then (res => {
+      if (!res.ok) {
+        throw new Error(res.status)
+      }
+      return res.json()
+    })
+    .then (data => {
+      this.setState({
+        notes: data,
+      })
+    })
+    .catch(error => {
+      console.log("notes retreival error", error)
+    })
+
+    //setState
+
   }
 
   render() {
+    const contextValue = {
+      notes: this.state.notes,
+      folders: this.state.folders,
+      //deleteNote: this.deleteNote
+    }
     return (
-    <div className='App'>
-      <header>
-        <Header></Header>
-      </header>
-      <Route
-        exact
-        path='/'
-        render={ () => 
-          <main>
-            <div className="body">
-              <Sidebar data={this.state.notes} className="Sidebar"></Sidebar>
-              <NoteList selectedFolder="" selectedNote="" data={this.state.notes} className="List"></NoteList>
-            </div>
-          </main>} 
-      />
+      <NotesContext.Provider value={contextValue}>
+        <div className='App'>
+          <header>
+            <Header></Header>
+          </header>
+      <div>
+        <Route
+          exact
+          path='/'
+          render={ () => 
+            <main>
+              <div className="body">
+                <Sidebar  className="Sidebar"></Sidebar>
+                <NoteList selectedFolder="" selectedNote="" className="List"></NoteList>
+              </div>
+            </main>} 
+        />
 
       <Route
         path='/folder/:folderId'
         render={ (props) => 
           <main>
             <div className="body">
-              <Sidebar data={this.state.notes} className="Sidebar"></Sidebar>
-              <NoteList selectedFolder={props.match.params.folderId} selectedNote="" data={this.state.notes} className="List"></NoteList>
+              <Sidebar className="Sidebar"></Sidebar>
+              <NoteList selectedFolder={props.match.params.folderId} selectedNote=""  className="List"></NoteList>
             </div>
           </main> }
 
         />
 
-        <Route
-          path='/note/:noteId'
+        <div className="body">
+
+          <div className="Sidebar">
+          <Route
+            path='/note/:noteId'
+            component={NotePageSidebar} 
+            />
+          </div>
+
+          <div className="List">
+            <Route
+            path='/note/:noteId'
+            component={Note} 
+            />
+          </div>
+        </div>
+
+          {/*
           render={ props => {
-            
-            const { noteId } = props.match.params
-            const { notes } = this.state.notes.notes
-            const {folders} = this.state.notes.folders
-
-            const selectedNote = this.state.notes.notes.find( note => note.id === noteId)
-            const selectedFolderId = selectedNote.folderId;
-            const selectedFolder = this.state.notes.folders.find(folder => folder.id === selectedFolderId).name
-
           return (
             <main>
               <div className="body">
        
-                  <NotePageSidebar className="Sidebar" selectedFolder={selectedFolder}></NotePageSidebar>
-                  <Note selectedNote={props.match.params.noteId} data={this.state.notes} className="List"></Note>
+                  <NotePageSidebar className="Sidebar"></NotePageSidebar>
+                  <Note className="List"></Note>
 
               </div>
 
           </main> ) }
           }
-          />
-      
+          */
+        }
+        </div>
     </div>
+       </NotesContext.Provider>
     )};
 }
 
 export default App;
-
-/* props.match.params.poemId */

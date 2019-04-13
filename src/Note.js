@@ -1,16 +1,26 @@
 import React from 'react';
 import NoteListItem from './NoteListItem';
 import './Note.css';
+import NotesContext from './NotesContext';
+
 
 class Note extends React.Component {
+ 
+    static contextType = NotesContext;
 
 render() {
 
-    const noteData = this.props.data.notes;
+    const noteData = this.context.notes
+    console.log("Context", this.context);
+    console.log("Context - notes ", noteData);
 
-    const selectedNoteId = this.props.selectedNote;
-        console.log("selectedNote", selectedNote);
+    const selectedNoteId = this.props.match.params.noteId;
+        console.log("selectedNoteId", selectedNoteId);
         const noteListItems = noteData.filter(function(note) {
+            console.log("filter ran");
+            console.log("note.id", note.id);
+            console.log("selectedNoteId", selectedNoteId);
+            console.log(noteListItems);
             return (note.id === selectedNoteId)
         }).map(note => {
             return (
@@ -22,9 +32,8 @@ render() {
             content={note.content}></NoteListItem>
             )
         })
-//  const selectedNote = this.state.notes.notes.find( note => note.id === noteId)
 
-    const selectedNote = noteData.find(note => note.id === selectedNoteId)
+    const selectedNote = noteData.find(note => note.id === selectedNoteId) || {}
 
   return (
     <div className="note">
