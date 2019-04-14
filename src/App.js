@@ -57,11 +57,18 @@ class App extends React.Component {
 
   }
 
+  deleteNote = noteId => {
+    const newNotes = this.state.notes.filter(note => note.id !== noteId)
+    this.setState({
+      notes: newNotes,
+    })
+  }
+
   render() {
     const contextValue = {
       notes: this.state.notes,
       folders: this.state.folders,
-      //deleteNote: this.deleteNote
+      deleteNote: this.deleteNote
     }
     return (
       <NotesContext.Provider value={contextValue}>
