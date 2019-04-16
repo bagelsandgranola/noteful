@@ -5,6 +5,8 @@ import NotesContext from './NotesContext';
 
 class NoteListItem extends React.Component {
 
+static contextType = NotesContext;
+
 deleteNoteRequest(noteId, cb){
     fetch(`http://localhost:9090/notes` + `/${noteId}`, {
         method: 'DELETE',
@@ -29,6 +31,8 @@ deleteNoteRequest(noteId, cb){
 }
 
 render() {
+
+    
 
     const year = this.props.dateModified.substring(0, 4);
 

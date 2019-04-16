@@ -2,6 +2,9 @@ import React from 'react';
 import './NoteList.css';
 import NoteListItem from './NoteListItem';
 import NotesContext from './NotesContext';
+import { Link } from 'react-router-dom';
+import NoteError from './NoteError';
+
 
 class NoteList extends React.Component {
 
@@ -34,6 +37,7 @@ render() {
             )
         })
         console.log("all", noteListItems)
+        console.log("context notes", this.context.notes)
     }
     else if (this.props.selectedNote === "")
     {
@@ -72,11 +76,14 @@ render() {
 
   return (
     <div className="noteList">
+    <NoteError>
     <div>
         {noteListItems}
     </div>
-
+    </NoteError>
+        <Link to="/NewNote">
         <button> Add note </button>
+        </Link>
     </div>
   );
 }

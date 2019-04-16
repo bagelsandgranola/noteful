@@ -22,11 +22,14 @@ render() {
     })
 
   return (
-      
+
+
     <div className="Sidebar">
         {folderNav}
         <div className="sidebar_controls">
+        <Link to="/addFolder">
             <button> Add folder </button>
+        </Link>
         </div>
     </div>
   )};

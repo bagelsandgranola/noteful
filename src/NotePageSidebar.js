@@ -6,7 +6,9 @@ import NotesContext from './NotesContext';
 class NotePageSidebar extends React.Component {
 
   static defaultProps = {
-    history: {},
+    history: {
+      goBack: () => { }
+    },
     match: {
       params: {}
     }
@@ -34,7 +36,7 @@ render() {
   return (
     <div className="notePageSidebar">
         <h2> {selectedFolderName} </h2>
-        <button className="backButton"> Go Back </button>
+        <button className="backButton" onClick={() => this.props.history.goBack()}> Go Back </button>
     </div>
   );
 }

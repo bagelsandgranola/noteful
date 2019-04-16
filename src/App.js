@@ -8,6 +8,9 @@ import { Route } from 'react-router-dom';
 import NotePageSidebar from './NotePageSidebar';
 import Note from './Note';
 import NotesContext from './NotesContext'
+import AddFolder from './AddFolder';
+import NewNote from './NewNote';
+import NoteError from './NoteError';
 
 class App extends React.Component {
 
@@ -17,6 +20,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+
     console.log("componentDidMount")
     //folders http://localhost:9090/folders
     fetch('http://localhost:9090/folders')
@@ -64,11 +68,31 @@ class App extends React.Component {
     })
   }
 
+  handleAddFolder = folder => {
+    this.setState({
+      folders: [
+      ...this.state.folders,
+      folder
+      ]
+    })
+  }
+
+  handleAddNote = note => {
+    this.setState({
+      notes: [
+        ...this.state.notes,
+        note
+      ]
+    })
+  }
+
   render() {
     const contextValue = {
       notes: this.state.notes,
       folders: this.state.folders,
-      deleteNote: this.deleteNote
+      deleteNote: this.deleteNote,
+      addFolder: this.handleAddFolder,
+      addNote: this.handleAddNote,
     }
     return (
       <NotesContext.Provider value={contextValue}>
@@ -82,10 +106,12 @@ class App extends React.Component {
           path='/'
           render={ () => 
             <main>
-              <div className="body">
-                <Sidebar  className="Sidebar"></Sidebar>
-                <NoteList selectedFolder="" selectedNote="" className="List"></NoteList>
-              </div>
+               <NoteError>
+                  <div className="body">
+                    <Sidebar  className="Sidebar"></Sidebar>
+                    <NoteList selectedFolder="" selectedNote="" className="List"></NoteList>  
+                  </div>
+                </NoteError>
             </main>} 
         />
 
@@ -93,12 +119,24 @@ class App extends React.Component {
         path='/folder/:folderId'
         render={ (props) => 
           <main>
+            <NoteError>
             <div className="body">
               <Sidebar className="Sidebar"></Sidebar>
               <NoteList selectedFolder={props.match.params.folderId} selectedNote=""  className="List"></NoteList>
             </div>
+            </NoteError>
           </main> }
 
+        />
+
+        <Route
+          path='/addFolder'
+          component={AddFolder}
+        />
+
+        <Route
+          path='/NewNote'
+          component={NewNote}
         />
 
         <div className="body">
