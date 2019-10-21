@@ -19,14 +19,14 @@ handleSubmit = e => {
     e.preventDefault();
     const note = {
         name: e.target['note-name'].value,
-        folderId: e.target['folder-id'].value,
+        folderid: e.target['folder-id'].value,
         content: e.target['note-content'].value,
         modified: "2019-01-03T00:00:00.000",
         //id: "",
 
     }
 
-    fetch('http://localhost:9090/notes', {
+    fetch('http://localhost:8000/api/notes', {
         method: 'POST',
         headers: {
             'content-type': 'application/json'
@@ -40,7 +40,7 @@ handleSubmit = e => {
       })
       .then(folder => {
           this.context.addNote(note)
-          this.props.history.push(`/folder/${note.folderId}`)
+          this.props.history.push(`/folder/${note.folderid}`)
       })
       .catch(error => {
           console.error({error})

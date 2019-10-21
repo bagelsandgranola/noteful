@@ -14,10 +14,11 @@ render() {
 
     
     const data = this.context.notes;
-    console.log(data);
+    console.log("data", data);
+
 
     const noteData = this.context.notes;
-    console.log(noteData);
+    console.log("noteData", noteData);
 
     const folderData = this.context.folders;
     console.log(folderData);
@@ -31,7 +32,7 @@ render() {
             <NoteListItem 
             title={note.name}
             dateModified={note.modified}
-            folderId={note.folderId}
+            folderId={note.folderid}
             id={note.id}
             content={note.content}></NoteListItem>
             )
@@ -43,13 +44,15 @@ render() {
     {
         const selectedFolder = this.props.selectedFolder;
         noteListItems = noteData.filter(function(note) {
-            return (note.folderId === selectedFolder)
+            console.log("note.folderid", note.folderid)
+            console.log("selectedFolder", selectedFolder)
+            return (note.folderid == selectedFolder)
         }).map(note => {
             return (
             <NoteListItem 
             title={note.name}
             dateModified={note.modified}
-            folderId={note.folderId}
+            folderId={note.folderid}
             id={note.id}
             content={note.content}></NoteListItem>
             )
@@ -67,7 +70,7 @@ render() {
             <NoteListItem 
             title={note.name}
             dateModified={note.modified}
-            folderId={note.folderId}
+            folderId={note.folderid}
             id={note.id}
             content={note.content}></NoteListItem>
             )
