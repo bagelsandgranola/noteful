@@ -8,7 +8,7 @@ class NoteListItem extends React.Component {
 static contextType = NotesContext;
 
 deleteNoteRequest(noteId, cb){
-    fetch(`http://localhost:8000/api/notes` + `/${noteId}`, {
+    fetch(`https://mysterious-bastion-24704.herokuapp.com/api/notes` + `/${noteId}`, {
         method: 'DELETE',
         headers: {
             'content-type': 'application/json'

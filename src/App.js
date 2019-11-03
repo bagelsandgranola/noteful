@@ -1,26 +1,3 @@
-//Design + build Noteful database with tables to represt folders + notes
-
-//DONE
-//Database design + normalization 
-//sketch entity relationship diagram of database
-
-//DONE
-//Write SQL migration scripts to create Noteful database with tables
-//for folders and notes including relationships and CASCADES
-
-//DONE
-//Write Note and Folder service objects for new tables
-//done with Get and Insert, Update + Delete for Notes & Folders
-
-//DONE
-//Write routers to perform CRUD operations for Notes and Folders
-//Notes - Create, Read, Update,
-//Write an Express server for the Noteful API w/ the endpoints /notes and /folders
-
-//Refactor client application to use this API
-//Start by changing URL used to request data and see if that works.
-//If not, make necessary modifications 
-
 import React from 'react';
 import Header from './Header';
 import NoteList from './NoteList';
@@ -45,8 +22,7 @@ class App extends React.Component {
   componentDidMount() {
 
     console.log("componentDidMount")
-    //folders http://localhost:9090/folders
-    fetch('http://localhost:8000/api/folders')
+    fetch('https://mysterious-bastion-24704.herokuapp.com/api/folders')
     .then(res => {
       if (!res.ok) {
         throw new Error(res.status)
@@ -64,7 +40,7 @@ class App extends React.Component {
     })
 
     //notes 
-    fetch('http://localhost:8000/api/notes')
+    fetch('https://mysterious-bastion-24704.herokuapp.com/api/notes')
     .then (res => {
       if (!res.ok) {
         throw new Error(res.status)
