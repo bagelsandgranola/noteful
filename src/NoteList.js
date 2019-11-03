@@ -12,16 +12,12 @@ class NoteList extends React.Component {
 
 render() {
 
-    
-    const data = this.context.notes;
-    console.log("data", data);
-
 
     const noteData = this.context.notes;
     console.log("noteData", noteData);
 
     const folderData = this.context.folders;
-    console.log(folderData);
+    console.log("folderData", folderData);
 
     var noteListItems= [];
 

@@ -20,8 +20,7 @@ render() {
             console.log("filter ran");
             console.log("note.id", note.id);
             console.log("selectedNoteId", selectedNoteId);
-            console.log(noteListItems);
-            return (note.id === selectedNoteId)
+            return (note.id == selectedNoteId)
         }).map(note => {
             return (
             <NoteListItem 
@@ -33,7 +32,8 @@ render() {
             )
         })
 
-    const selectedNote = noteData.find(note => note.id === selectedNoteId) || {}
+    const selectedNote = noteData.find(note => note.id == selectedNoteId) || {}
+    console.log("extra check selectedNote", selectedNote)
 
   return (
     <div className="note">

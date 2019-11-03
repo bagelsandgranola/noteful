@@ -21,13 +21,11 @@ render() {
   const folders = this.context.folders
   const notes = this.context.notes
   console.log("Context", this.context);
-  console.log("Context - notes ", this.context.notes);
-
   console.log("notes", notes);
   console.log("folders", folders);
-  const selectedNote = notes.find(note => note.id === noteId) || {}
+  const selectedNote = notes.find(note => note.id == noteId) || {}
   console.log("selectedNote", selectedNote);
-  const selectedNoteFolderId = selectedNote.folderId;
+  const selectedNoteFolderId = selectedNote.folderid;
   console.log("selectedNoteFolderId", selectedNoteFolderId);
 
   const selectedFolder = folders.find(folder => folder.id === selectedNoteFolderId) || {}
