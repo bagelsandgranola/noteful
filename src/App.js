@@ -61,7 +61,8 @@ class App extends React.Component {
   }
 
   deleteNote = noteId => {
-    const newNotes = this.state.notes.filter(note => note.id !== noteId)
+    const newNotes = this.state.notes.filter(note => note.id != noteId)
+    console.log("newNotes on delete", newNotes)
     this.setState({
       notes: newNotes,
     })

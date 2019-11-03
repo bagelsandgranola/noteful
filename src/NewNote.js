@@ -38,8 +38,12 @@ handleSubmit = e => {
           return res.json().then(e => Promise.reject(e))
         return res.json()
       })
-      .then(folder => {
-          this.context.addNote(note)
+      .then(res => {
+          console.log("res.body.id", res.id)
+          this.context.addNote({ 
+                ...note,
+                id: res.id
+            })
           this.props.history.push(`/folder/${note.folderid}`)
       })
       .catch(error => {
